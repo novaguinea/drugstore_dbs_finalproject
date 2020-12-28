@@ -97,6 +97,7 @@
 </div>
 <!-- /.container-fluid -->
 
+<<<<<<< HEAD
 
 <!-- End of Main Content -->
 <div class="modal" tabindex="-1" id="addProduct">
@@ -116,3 +117,6 @@
         </div>
     </div>
 </div>
+=======
+<!-- End of Main Content -->
+>>>>>>> 809e47c3cbb48546bdb7b6f17a4f200cb48a664a
