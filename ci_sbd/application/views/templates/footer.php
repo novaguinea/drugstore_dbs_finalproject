@@ -1,8 +1,8 @@
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
+    <div class="container my-auto mb-0">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Kelompok Sistem Basis Data <?= date('Y'); ?></span>
+            <span class="text-muted">Copyright &copy; Kelompok Sistem Basis Data <?= date('Y'); ?></span>
         </div>
     </div>
 </footer>

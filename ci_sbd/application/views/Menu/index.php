@@ -61,40 +61,7 @@
             </table>
         </div>
 
-        <!--card form started-->
-        <div class="card mt-5 w-75">
-            <div class="card-header bg-dark text-light">
-                Drug Input Form
-            </div>
-            <div class="card-body">
-                <form action="" method="post">
-                    <div class="form-group">
-                        <input type="text" name="tkodeobat" maxlength="10" value="<?= @$kodeobat ?>" class="form-control" placeholder="Kode Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="tnamaobat" maxlength="20" value="<?= @$namaobat ?>" class="form-control" placeholder="Nama Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="tbentukobat" maxlength="10" value="<?= @$bentukobat ?>" class="form-control" placeholder="Bentuk Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="date" name="tproduksiobat" value="<?= $tglprod = "" ?>" class="form-control" placeholder="Tgl Produksi Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="date" name="tkadaluarsaobat" value="<?= $tglexp = "" ?>" class="form-control" placeholder="Tgl Kadaluarsa Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="number" name="thargasatuan" maxlength="30" value="<?= $hargasatuan = "" ?>" class="form-control" placeholder="Harga Satuan" required>
-                    </div>
 
-                    <button type="submit" class="btn btn-primary mt-3" name="btnadd">Save</button>
-                    <button type="reset" class="btn btn-secondary mt-3" name="btnreset">Reset</button>
-
-                </form>
-            </div>
-        </div>
-
-        <!--card form ended-->
 
     </div>
 
@@ -128,15 +95,15 @@
                     </div>
                     <div class="form-group">
                         <label for="">Tgl Produksi</label>
-                        <input type="date" name="tproduksiobat" value="<?= $tglprod ?>" class="form-control" placeholder="Tgl Produksi Obat" required>
+                        <input type="date" name="tproduksiobat" value="<?= $tglprod = "" ?>" class="form-control" placeholder="Tgl Produksi Obat" required>
                     </div>
                     <div class="form-group">
                         <label for="">Tgl Kadaluarsa</label>
-                        <input type="date" name="tkadaluarsaobat" value="<?= $tglexp ?>" class="form-control" placeholder="Tgl Kadaluarsa Obat" required>
+                        <input type="date" name="tkadaluarsaobat" value="<?= $tglexp = "" ?>" class="form-control" placeholder="Tgl Kadaluarsa Obat" required>
                     </div>
                     <div class="form-group">
                         <label for="">Harga Satuan</label>
-                        <input type="number" name="thargasatuan" maxlength="30" value="<?= $hargasatuan ?>" class="form-control" placeholder="Harga Satuan" required>
+                        <input type="number" name="thargasatuan" maxlength="30" value="<?= $hargasatuan = "" ?>" class="form-control" placeholder="Harga Satuan" required>
                     </div>
 
                     <button type="submit" class="btn btn-primary mt-3" name="btnadd">Save</button>
