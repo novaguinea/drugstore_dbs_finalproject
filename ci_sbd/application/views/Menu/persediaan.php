@@ -18,7 +18,13 @@
 
         <div class="col-lg-6">
             <!--ada ini tp gaada isinya-->
-
+            <a href="" class="btn btn-primary mb-3 mt-3" data-toggle="modal" data-target="#newMenuModal">Add</a>
+            <a href="<?= base_url('menu/updateHarga'); ?>" class="btn btn-warning" data-toggle="modal" data-target="#updateHargaModal">
+                Edit
+            </a>
+            <a href="" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
+                Delete
+            </a>
             <table class="table table-hover">
                 <thead>
                     <tr class="bg-dark text-light">

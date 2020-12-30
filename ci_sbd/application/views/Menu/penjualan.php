@@ -18,6 +18,24 @@
 
         <div class="col-lg-8">
             <!--ada ini tp gaada isinya-->
+            <a href="" class="btn btn-primary mb-3 mt-3" data-toggle="modal" data-target="#newMenuModal">Add</a>
+            <a href="<?= base_url('menu/updateHarga'); ?>" class="btn btn-warning" data-toggle="modal" data-target="#updateHargaModal">
+                Edit
+            </a>
+            <a href="" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
+                Delete
+            </a>
+
+            <!--Dropdown Started-->
+            <?php $option = ''; ?>
+            <select class="btn btn-outline-secondary" name="penjualan" id="penjualan" value="bulan">
+                <option value="">All Transactions</option>
+                <option value="" action="<?php $option = 'januari'; ?>">Januari</option>
+                <option value="" action="<?php $option = 'februari'; ?>">Februari</option>
+                <option value="" action="<?php $option = 'maret'; ?>">Maret</option>
+            </select>
+
+            <!--Dropdown Ended-->
 
             <table class="table table-hover">
                 <thead>
@@ -30,7 +48,20 @@
                 </thead>
                 <tbody>
                     <?php $no = 1;
-                    $data = $this->db->get('penfebruari');
+                    if ($option == 'januari') {
+                        $data = $this->db->get('penjanuari');
+                    } else if ($option == 'februari') {
+                        $data = $this->db->get('penfebruari');
+                    } else if ($option == 'maret') {
+                        $data = $this->db->get('penmaret');
+                    } else {
+                        $data = $this->db->query('
+                        SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penjanuari 
+                        UNION SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penfebruari 
+                        UNION SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penmaret 
+                        ORDER BY TglTransaksi;
+                        ');
+                    }
                     ?>
                     <?php
                     foreach ($data->result_array() as $row) : ?>
