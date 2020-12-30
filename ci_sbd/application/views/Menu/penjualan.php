@@ -16,7 +16,7 @@
 
     <div class="row">
 
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <!--ada ini tp gaada isinya-->
 
             <table class="table table-hover">
@@ -24,19 +24,21 @@
                     <tr class="bg-dark text-light">
                         <th scope="col">No.</th>
                         <th scope="col">Kode Obat</th>
-                        <th scope="col">Stok Obat</th>
+                        <th scope="col">Tanggal Transaksi</th>
+                        <th scope="col">Jumlah Terjual</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $no = 1;
-                    $data = $this->db->get('persediaan');
+                    $data = $this->db->get('penfebruari');
                     ?>
                     <?php
                     foreach ($data->result_array() as $row) : ?>
                         <tr>
                             <td name="tno"><?= $no++; ?></td>
                             <td><?= $row['KodeObat'] ?></td>
-                            <td><?= $row['JumlahSedia'] ?></td>
+                            <td><?= $row['TglTransaksi'] ?></td>
+                            <td><?= $row['Jumlah_Terjual'] ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

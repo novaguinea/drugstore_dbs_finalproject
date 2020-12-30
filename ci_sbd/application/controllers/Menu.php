@@ -103,4 +103,34 @@ class Menu extends CI_Controller
         );
         redirect('menu');
     }
+
+    public function persediaan()
+    {
+        $data['title'] = 'Persediaan Obat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/persediaan', $data);
+        $this->load->view('templates/footer');
+
+        if ($this->form_validation->run() ==  false) {
+        }
+    }
+
+    public function penjualan()
+    {
+        $data['title'] = 'Penjualan Obat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/penjualan', $data);
+        $this->load->view('templates/footer');
+
+        if ($this->form_validation->run() ==  false) {
+        }
+    }
 }
