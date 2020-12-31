@@ -1,5 +1,3 @@
-<!--THIS IS A DETAIL PRODUCT PAGE-->
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!--THIS IS A DETAIL PRODUCT PAGE-->
@@ -18,7 +16,7 @@
 
     <div class="row">
 
-        <div class="col-lg-12">
+        <div class="col-lg-8">
             <!--ada ini tp gaada isinya-->
             <a href="" class="btn btn-primary mb-3 mt-3" data-toggle="modal" data-target="#newMenuModal">Add</a>
             <a href="<?= base_url('menu/updateHarga'); ?>" class="btn btn-warning" data-toggle="modal" data-target="#updateHargaModal">
@@ -27,43 +25,45 @@
             <a href="" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
                 Delete
             </a>
-            <table class="table table-hover">
+
+            <!--Month Select Buttons Started-->
+
+            <div>
+                <a class="btn btn-outline-secondary" href="<?= base_url('menu/penjualan'); ?>">All</a>
+                <a class="btn btn-outline-secondary" href="<?= base_url('menu/januari'); ?>">Januari</a>
+                <a class="btn btn-outline-secondary" href="<?= base_url('menu/februari'); ?>">Februari</a>
+                <a class="btn btn-outline-secondary" href="<?= base_url('menu/maret'); ?>">Maret</a>
+            </div>
+
+
+            <!--Month Select Buttons Ended-->
+
+            <table class="table table-hover mt-3">
                 <thead>
                     <tr class="bg-dark text-light">
                         <th scope="col">No.</th>
                         <th scope="col">Kode Obat</th>
-                        <th scope="col">Nama Obat</th>
-                        <th scope="col">Bentuk Obat</th>
-                        <th scope="col">Tgl Produksi</th>
-                        <th scope="col">Tgl Kadaluarsa</th>
-                        <th scope="col">Harga Satuan</th>
-                        <th scope="col">Edit | Delete</th>
+                        <th scope="col">Tanggal Transaksi</th>
+                        <th scope="col">Jumlah Terjual</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 1;
-                    $data = $this->db->get('obat');
-                    ?>
                     <?php
-                    foreach ($data->result_array() as $row) : ?>
+                    $no = 1;
+                    $data['penjualan'] = $this->db->get('penfebruari');
+
+                    foreach ($data['penjualan']->result_array() as $row) : ?>
                         <tr>
                             <td name="tno"><?= $no++; ?></td>
                             <td><?= $row['KodeObat'] ?></td>
-                            <td><?= $row['NamaObat'] ?></td>
-                            <td><?= $row['BentukObat'] ?></td>
-                            <td><?= $row['TglProduksi'] ?></td>
-                            <td><?= $row['TglKadaluarsa'] ?></td>
-                            <td><?= $row['HargaSatuan'] ?></td>
-                            <td>
-                                <a href="<?= base_url('menu/updateHarga'); ?>" class="btn btn-warning" data-toggle="modal" data-target="#updateHargaModal">
-                                    Edit
-                                </a>
-                                <a href="" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
-                                    Delete
-                                </a>
-                            </td>
+                            <td><?= $row['TglTransaksi'] ?></td>
+                            <td><?= $row['Jumlah_Terjual'] ?></td>
                         </tr>
-                    <?php endforeach; ?>
+
+                    <?php
+                    endforeach;
+
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -147,8 +147,8 @@
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="" value="">Kode Obat</label>
-                        <input type="text" name="tkodeobat" maxlength="10" value="<?= $product['KodeObat'] ?>" class="form-control">
+                        <label for="">Kode Obat</label>
+                        <input type="text" name="tkodeobat" maxlength="10" value="" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="">Harga Satuan</label>

@@ -26,18 +26,19 @@
                 Delete
             </a>
 
-            <!--Dropdown Started-->
-            <?php $option = ''; ?>
-            <select class="btn btn-outline-secondary" name="penjualan" id="penjualan" value="bulan">
-                <option value="">All Transactions</option>
-                <option value="" action="<?php $option = 'januari'; ?>">Januari</option>
-                <option value="" action="<?php $option = 'februari'; ?>">Februari</option>
-                <option value="" action="<?php $option = 'maret'; ?>">Maret</option>
-            </select>
+            <!--Month Select Buttons Started-->
 
-            <!--Dropdown Ended-->
+            <div>
+                <a class="btn btn-outline-secondary" href="<?= base_url('menu/penjualan'); ?>">All</a>
+                <a class="btn btn-outline-secondary" href="<?= base_url('menu/januari'); ?>">Januari</a>
+                <a class="btn btn-outline-secondary" href="<?= base_url('menu/februari'); ?>">Februari</a>
+                <a class="btn btn-outline-secondary" href="<?= base_url('menu/maret'); ?>">Maret</a>
+            </div>
 
-            <table class="table table-hover">
+
+            <!--Month Select Buttons Ended-->
+
+            <table class="table table-hover mt-3">
                 <thead>
                     <tr class="bg-dark text-light">
                         <th scope="col">No.</th>
@@ -47,31 +48,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 1;
-                    if ($option == 'januari') {
-                        $data = $this->db->get('penjanuari');
-                    } else if ($option == 'februari') {
-                        $data = $this->db->get('penfebruari');
-                    } else if ($option == 'maret') {
-                        $data = $this->db->get('penmaret');
-                    } else {
-                        $data = $this->db->query('
-                        SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penjanuari 
-                        UNION SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penfebruari 
-                        UNION SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penmaret 
-                        ORDER BY TglTransaksi;
-                        ');
-                    }
-                    ?>
                     <?php
-                    foreach ($data->result_array() as $row) : ?>
+                    $no = 1;
+                    $data['penjualan'] = $this->db->query('
+            SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penjanuari 
+            UNION SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penfebruari 
+            UNION SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penmaret 
+            ORDER BY TglTransaksi;
+            ');
+
+                    foreach ($data['penjualan']->result_array() as $row) : ?>
                         <tr>
                             <td name="tno"><?= $no++; ?></td>
                             <td><?= $row['KodeObat'] ?></td>
                             <td><?= $row['TglTransaksi'] ?></td>
                             <td><?= $row['Jumlah_Terjual'] ?></td>
                         </tr>
-                    <?php endforeach; ?>
+
+                    <?php
+                    endforeach;
+
+                    ?>
                 </tbody>
             </table>
         </div>

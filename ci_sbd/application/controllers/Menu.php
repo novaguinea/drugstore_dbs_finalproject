@@ -116,21 +116,86 @@ class Menu extends CI_Controller
         $this->load->view('templates/footer');
 
         if ($this->form_validation->run() ==  false) {
+        } else {
         }
     }
 
+    public function januari()
+    {
+        $data['title'] = 'Penjualan Obat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        if ($this->form_validation->run() ==  false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/januari', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = $this->db->get('penjanuari');
+            redirect('menu');
+        }
+    }
+    public function februari()
+    {
+        $data['title'] = 'Penjualan Obat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+
+        if ($this->form_validation->run() ==  false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/februari', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = $this->db->get('penfebruari');
+            redirect('menu');
+        }
+    }
+    public function maret()
+    {
+        $data['title'] = 'Penjualan Obat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        if ($this->form_validation->run() ==  false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/maret', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data['value'] = '3';
+            $data = $this->db->get('penmaret');
+            $this->load->view('menu/penjualan', $data);
+            redirect('menu');
+        }
+    }
     public function penjualan()
     {
         $data['title'] = 'Penjualan Obat';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('menu/penjualan', $data);
-        $this->load->view('templates/footer');
-
         if ($this->form_validation->run() ==  false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/penjualan', $data);
+            $this->load->view('templates/footer');
+        } else {
+
+            if ($value == 1) {
+                $data = $this->db->get('penjanuari');
+                redirect('menu');
+            } else {
+                $data['penjualan'] = $this->db->query('
+                SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penjanuari 
+                UNION SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penfebruari 
+                UNION SELECT KodeObat, TglTransaksi, Jumlah_Terjual FROM penmaret 
+                ORDER BY TglTransaksi;
+                ');
+                redirect('menu');
+            }
         }
     }
 }
