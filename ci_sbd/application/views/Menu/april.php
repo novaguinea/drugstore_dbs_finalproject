@@ -20,7 +20,7 @@
             <!--ada ini tp gaada isinya-->
             <a href="<?= base_url('menu') ?>" class="btn btn-primary mb-3 mt-3" data-toggle="modal" data-target="#transaksiModal">Add</a>
 
-            <a class="btn btn-success " href="<?= base_url('menu/exportPenjualan_Jan') ?>">
+            <a class="btn btn-success " href="<?= base_url('menu/exportPenjualan_Apr') ?>">
                 <i class="fas fa-fw fa-file-excel"></i>
                 <span>Export</span>
             </a>
@@ -51,7 +51,7 @@
                 <tbody>
                     <?php
                     $no = 1;
-                    $data['penjualan'] = $this->db->get('penjanuari');
+                    $data['penjualan'] = $this->db->get('penapril');
 
                     foreach ($data['penjualan']->result_array() as $row) : ?>
                         <tr>
@@ -60,10 +60,10 @@
                             <td><?= $row['TglTransaksi'] ?></td>
                             <td><?= $row['Jumlah_Terjual'] ?></td>
                             <td>
-                                <a href="<?php echo base_url(); ?>menu/editJanuari/<?= $row['id']; ?>" action="" class="btn btn-warning">
+                                <a href="<?php echo base_url(); ?>menu/editApril/<?= $row['id']; ?>" action="" class="btn btn-warning">
                                     Edit
                                 </a>
-                                <a href="<?php echo base_url(); ?>menu/deletePenJanuari/<?= $row['id']; ?>" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
+                                <a href="<?php echo base_url(); ?>menu/deletePenApril/<?= $row['id']; ?>" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
                                     Delete
                                 </a>
                             </td>
@@ -76,6 +76,8 @@
                 </tbody>
             </table>
         </div>
+
+
 
     </div>
 
@@ -94,7 +96,7 @@
                 </button>
             </div>
             <div class="card-body">
-                <form action="<?= base_url('januari') ?>" method="post">
+                <form action="<?= base_url('april') ?>" method="post">
                     <div class="form-group">
                         <label for="">Kode Obat</label>
                         <input type="text" name="tkodeobat" maxlength="10" value="<?= $kodeobat = "" ?>" class="form-control" placeholder="Kode Obat" required>
@@ -109,7 +111,7 @@
                         <input type="number" name="terjual" maxlength="30" value="<?= $terjual = "" ?>" class="form-control" placeholder="Jumlah Terjual" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-3" href="<?= base_url('januari') ?>" name="btnadd">Save</button>
+                    <button type="submit" class="btn btn-primary mt-3" href="<?= base_url('april') ?>" name="btnadd">Save</button>
                     <button type="reset" class="btn btn-secondary mt-3" name="btnreset">Reset</button>
 
                 </form>

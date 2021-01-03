@@ -122,4 +122,24 @@ class Menu_Model extends CI_Model
         $this->db->where('id', $id);
         $this->db->delete('penmaret');
     }
+    public function dataPenApril()
+    {
+        return $this->db->get('penapril')->result_array();
+    }
+    public function getApril($id)
+    {
+        return $this->db->get_where('penapril', [
+            'id' => $id
+        ]);
+    }
+    public function updateApr($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('penapril', $data);
+    }
+    public function deletePenApril_m($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('penapril');
+    }
 }

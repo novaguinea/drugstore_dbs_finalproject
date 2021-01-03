@@ -32,6 +32,7 @@
                 <a class="btn btn-outline-secondary" href="<?= base_url('menu/januari'); ?>">Januari</a>
                 <a class="btn btn-outline-secondary" href="<?= base_url('menu/februari'); ?>">Februari</a>
                 <a class="btn btn-outline-secondary" href="<?= base_url('menu/maret'); ?>">Maret</a>
+                <a class="btn btn-outline-secondary" href="<?= base_url('menu/april'); ?>">April</a>
             </div>
 
 
@@ -122,40 +123,3 @@
 
 
 <!-- Button trigger modal -->
-
-<!-- Modal UPDATE OBAT-->
-<div class="modal fade" id="updateHargaModal" tabindex="-1" role="dialog" aria-labelledby="updateHargaModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateHargaModalLabel">Update Harga</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="<?= base_url('menu/updateHarga'); ?>" method="post">
-
-                <?php
-                $data = $this->db->get('obat');
-
-                ?>
-
-
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="">Kode Obat</label>
-                        <input type="text" name="tkodeobat" maxlength="10" value="" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Harga Satuan</label>
-                        <input type="number" name="thargasatuan" maxlength="30" value="" class="form-control" placeholder="Harga Satuan" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" href="<?= base_url('menu/updateHarga') ?>">Add</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>

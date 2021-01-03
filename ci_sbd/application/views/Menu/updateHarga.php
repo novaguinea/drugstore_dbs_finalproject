@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" href="<?= base_url('menu/updateHargaController') ?>">Save</button>
+                    <button type="submit" class="btn btn-primary" id="submit" onclick="display()" href="<?= base_url('menu/updateHargaController') ?>">Save</button>
                 </div>
 
             </form>
@@ -42,6 +42,38 @@
     </div>
 
 </div>
+
+<script>
+    function display() {
+        var date = new Date();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+
+        var dates = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        var fullDate = dates + "/" + month + "/" + year;
+
+        var host = '<?= $user['name']; ?>';
+        var arows = '<?= $this->db->affected_rows() ?>'
+
+        if (document.getElementById('submit').innerHTML) {
+
+            window.alert("Data Obat berhasil di UPDATE!" +
+                "\nDimodifikasi : " + fullDate + " " + strTime +
+                "\nNama Host : " + host +
+                "\n(" + arows + " row(s) affected)"
+            );
+
+        }
+
+    }
+</script>
 <!-- /.container-fluid -->
 
 <!-- End of Main Content -->

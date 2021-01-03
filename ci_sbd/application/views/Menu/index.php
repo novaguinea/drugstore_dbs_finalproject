@@ -12,7 +12,8 @@
         <?= form_error('tkodeobat', '<div class="alert alert-danger" role="alert"> ', ' </div>'); ?>
 
         <!--alert success-->
-        <?= $this->session->flashdata('message'); ?>
+        <?php echo $this->session->flashdata('message');
+        ?>
 
     </div>
 
@@ -52,7 +53,7 @@
                             <td><?= $row['BentukObat'] ?></td>
                             <td><?= $row['TglProduksi'] ?></td>
                             <td><?= $row['TglKadaluarsa'] ?></td>
-                            <td><?= $row['HargaSatuan'] ?></td>
+                            <td>Rp.<?= $row['HargaSatuan'] ?></td>
                             <td>
                                 <a href="<?php echo base_url(); ?>menu/updateHarga/<?= $row['KodeObat']; ?>" action="" class="btn btn-warning">
                                     Edit

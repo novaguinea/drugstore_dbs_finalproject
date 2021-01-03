@@ -80,8 +80,8 @@ class Menu extends CI_Controller
         $this->session->set_flashdata(
             'message',
             '<div class="alert alert-success" role="alert">
-            Data Obat Berhasil di UPDATE!
-            </div>'
+            Data Obat berhasil Di UPDATE!
+        </div>'
         );
 
         redirect('menu');
@@ -339,7 +339,7 @@ class Menu extends CI_Controller
                 Data Penjualan successfully deleted!
             </div>'
         );
-        redirect('menu/februari');
+        redirect('menu/maret');
     }
 
     public function editMaret($id)
@@ -380,6 +380,91 @@ class Menu extends CI_Controller
         redirect('menu/maret');
     }
 
+    function april()
+    {
+        $data['title'] = 'Penjualan Obat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        if ($this->form_validation->run() ==  false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/april', $data);
+            $this->load->view('templates/footer');
+        } else {
+            //$data = $this->db->get('penjanuari');
+            $this->form_validation->set_rules('tkodeobat', 'Kode Obat', 'trim|required');
+            $this->form_validation->set_rules('transaksi', 'Tgl Transaksi', 'trim|required');
+            $this->form_validation->set_rules('terjual', 'Jumlah Terjual', 'trim|required');
+
+            $add = [
+                'KodeObat' => $this->input->post('tkodeobat'),
+                'TglTransaksi' => $this->input->post('transaksi'),
+                'Jumlah_Terjual' => $this->input->post('terjual')
+            ];
+
+            $this->db->insert('penapril', $add);
+
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success" role="alert">
+                    New product successfully added!
+                </div>'
+            );
+            redirect('menu');
+        }
+    }
+
+    public function deletePenApril($id)
+    {
+        $this->Menu_Model->deletePenApril_m($id);
+        $this->session->set_flashdata(
+            'message',
+            '<div class="alert alert-warning" role="alert">
+                Data Penjualan successfully deleted!
+            </div>'
+        );
+        redirect('menu/april');
+    }
+
+    public function editApril($id)
+    {
+        $data['title'] = 'Edit Transaksi';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['obat'] = $this->Menu_Model->getApril($id)->row_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/editJan', $data);
+        $this->load->view('templates/footer');
+    }
+    public function editAprilController()
+    {
+        $this->form_validation->set_rules('tkodeobat', 'Kode Obat', 'trim|required');
+        $this->form_validation->set_rules('transaksi', 'Tanggal Transaksi', 'trim|required');
+        $this->form_validation->set_rules('jmlterjual', 'Jumlah Terjual', 'trim|required');
+
+        $update = [
+            'id' => $this->input->post('id'),
+            'KodeObat' => $this->input->post('tkodeobat'),
+            'TglTransaksi' => $this->input->post('transaksi'),
+            'Jumlah_Terjual' => $this->input->post('jmlterjual')
+        ];
+
+        $this->Menu_Model->updateApr($update['id'], $update);
+
+        $this->session->set_flashdata(
+            'message',
+            '<div class="alert alert-success" role="alert">
+            Data Penjualan Berhasil di UPDATE!
+            </div>'
+        );
+
+        redirect('menu/april');
+    }
+
 
     public function penjualan()
     {
@@ -404,9 +489,6 @@ class Menu extends CI_Controller
         }
     }
 
-    public function addTransaction()
-    {
-    }
     public function infoObat()
     {
         $data['title'] = 'Stok Obat';
@@ -419,21 +501,7 @@ class Menu extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function showSearch()
-    {
-        $data['title'] = 'Stok Obat';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('menu/showSearch', $data);
-        $this->load->view('templates/footer');
-
-        $keyword = $this->input->post('keyword');
-        $data['obat'] = $this->infoObat_model->get_product_keyword($keyword);
-        $this->load->view('showSearch', $data);
-    }
 
     public function export()
     {
@@ -798,6 +866,58 @@ class Menu extends CI_Controller
         $filename = "Data_Obat" . date("d-m-Y-H-i-s") . '.xlsx';
 
         $objPHPExcel->getActiveSheet()->setTitle("Penjualan Obat Maret");
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposistion: attachment; filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+
+        $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $writer->save('php://output');
+
+        exit;
+    }
+
+    public function exportPenjualan_Apr()
+    {
+        //$this->load->library('PHPExcel/IOfactory');
+
+        $obat = $this->Menu_Model->dataPenApril();
+
+        require(APPPATH . 'PHPExcel-1.8/PHPExcel-1.8/Classes/PHPExcel.php');
+        require(APPPATH . 'PHPExcel-1.8/PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+
+
+        //require_once 'Classes/PHPExcel.php';
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Kelompok SBD");
+        $objPHPExcel->getProperties()->setLastModifiedBy("Kelompok SBD");
+        $objPHPExcel->getProperties()->setTitle("Penjualan Obat April");
+        $objPHPExcel->getProperties()->setSubject("");
+        $objPHPExcel->getProperties()->setDescription("");
+
+        $objPHPExcel->setActiveSheetIndex(0);
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'No.');
+        $objPHPExcel->getActiveSheet()->setCellValue('B1', 'Kode Obat');
+        $objPHPExcel->getActiveSheet()->setCellValue('C1', 'Tanggal Transaksi');
+        $objPHPExcel->getActiveSheet()->setCellValue('D1', 'Jumlah Terjual');
+
+        $row = 2;
+        $no = 1;
+
+        foreach ($obat as $data) {
+            $objPHPExcel->getActiveSheet()->setCellValue('A' . $row, $no);
+            $objPHPExcel->getActiveSheet()->setCellValue('B' . $row, $data['KodeObat']);
+            $objPHPExcel->getActiveSheet()->setCellValue('C' . $row, $data['TglTransaksi']);
+            $objPHPExcel->getActiveSheet()->setCellValue('D' . $row, $data['Jumlah_Terjual']);
+
+            $row++;
+            $no++;
+        }
+
+        $filename = "Data_Obat" . date("d-m-Y-H-i-s") . '.xlsx';
+
+        $objPHPExcel->getActiveSheet()->setTitle("Penjualan Obat April");
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposistion: attachment; filename="' . $filename . '"');

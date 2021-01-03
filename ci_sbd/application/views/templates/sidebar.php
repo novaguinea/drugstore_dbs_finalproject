@@ -53,12 +53,6 @@
             <hr class="sidebar-divider">
 
         <?php endforeach; ?>
-        <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('menu/backup') ?>">
-                <i class="fas fa-fw fa-database"></i>
-                <span>Backup Database</span>
-            </a>
-        </li>
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">

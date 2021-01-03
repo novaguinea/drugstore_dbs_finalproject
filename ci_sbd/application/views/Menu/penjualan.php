@@ -29,6 +29,7 @@
                 <a class="btn btn-outline-secondary" href="<?= base_url('menu/januari'); ?>">Januari</a>
                 <a class="btn btn-outline-secondary" href="<?= base_url('menu/februari'); ?>">Februari</a>
                 <a class="btn btn-outline-secondary" href="<?= base_url('menu/maret'); ?>">Maret</a>
+                <a class="btn btn-outline-secondary" href="<?= base_url('menu/april'); ?>">April</a>
             </div>
 
 

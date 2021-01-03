@@ -18,20 +18,25 @@
 
         <div class="col-lg-6">
             <!--ada ini tp gaada isinya-->
-            <form action="<?= base_url('menu/editPersediaanController'); ?>" method="post">
+            <form action="<?= base_url('menu/editAprilController'); ?>" method="post">
 
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">Kode Obat</label>
-                        <input type="text" name="tkodeobat" maxlength="10" value="<?= $persediaan['KodeObat']; ?>" class="form-control">
+                        <input type="hidden" name="id" maxlength="10" value="<?= $obat['id']; ?>" class="form-control">
+                        <input type="text" name="tkodeobat" maxlength="10" value="<?= $obat['KodeObat']; ?>" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="">Jumlah Sedia</label>
-                        <input type="number" name="tjumlahsedia" maxlength="30" value="<?= $persediaan['JumlahSedia']; ?>" class="form-control" placeholder="Jumlah Sedia" required>
+                        <label for="">Tanggal Transaksi</label>
+                        <input type="date" name="transaksi" maxlength="30" value="<?= $obat['TglTransaksi']; ?>" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Jumlah Terjual</label>
+                        <input type="number" name="jmlterjual" maxlength="30" value="<?= $obat['Jumlah_Terjual']; ?>" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="submit" onclick="display()" href="<?= base_url('menu/editPersediaanController') ?>">Save</button>
+                    <button type="submit" class="btn btn-primary" href="<?= base_url('menu/editAprilController') ?>">Save</button>
                 </div>
 
             </form>
