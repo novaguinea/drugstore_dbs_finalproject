@@ -19,12 +19,7 @@
         <div class="col-lg-8">
             <!--ada ini tp gaada isinya-->
             <a href="<?= base_url('menu') ?>" class="btn btn-primary mb-3 mt-3" data-toggle="modal" data-target="#transaksiModal">Add</a>
-            <a href="<?= base_url('menu/updateTransaction'); ?>" class="btn btn-warning" data-toggle="modal" data-target="#transaksiModal">
-                Edit
-            </a>
-            <a href="" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
-                Delete
-            </a>
+
             <a class="btn btn-success " href="<?= base_url('menu/exportPenjualan_Mar') ?>">
                 <i class="fas fa-fw fa-file-excel"></i>
                 <span>Export</span>
