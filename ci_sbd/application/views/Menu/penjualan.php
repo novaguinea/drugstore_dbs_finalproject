@@ -17,18 +17,14 @@
     <div class="row">
 
         <div class="col-lg-8">
-            <!--ada ini tp gaada isinya-->
-            <a href="" class="btn btn-primary mb-3 mt-3" data-toggle="modal" data-target="#newMenuModal">Add</a>
-            <a href="<?= base_url('menu/updateHarga'); ?>" class="btn btn-warning" data-toggle="modal" data-target="#updateHargaModal">
-                Edit
-            </a>
-            <a href="" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
-                Delete
-            </a>
 
             <!--Month Select Buttons Started-->
+            <a class="btn btn-success " href="<?= base_url('menu/exportAllPenjualan') ?>">
+                <i class="fas fa-fw fa-file-excel"></i>
+                <span>Export</span>
+            </a>
 
-            <div>
+            <div class="mt-3">
                 <a class="btn btn-outline-secondary" href="<?= base_url('menu/penjualan'); ?>">All</a>
                 <a class="btn btn-outline-secondary" href="<?= base_url('menu/januari'); ?>">Januari</a>
                 <a class="btn btn-outline-secondary" href="<?= base_url('menu/februari'); ?>">Februari</a>
@@ -83,11 +79,11 @@
 <!-- End of Main Content -->
 
 <!--MODAL ADD PRODUCT-->
-<div class="modal fade" id="newMenuModal" tabindex="-1" role="dialog" aria-labelledby="newMenuModalLabel" aria-hidden="true">
+<div class="modal fade" id="transaksiModal" tabindex="-1" role="dialog" aria-labelledby="newMenuModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newMenuModalLabel">Product Info</h5>
+                <h5 class="modal-title" id="newMenuModalLabel">Transaction Info</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -99,24 +95,13 @@
                         <input type="text" name="tkodeobat" maxlength="10" value="<?= @$kodeobat ?>" class="form-control" placeholder="Kode Obat" required>
                     </div>
                     <div class="form-group">
-                        <label for="">Nama Obat</label>
-                        <input type="text" name="tnamaobat" maxlength="20" value="<?= @$namaobat ?>" class="form-control" placeholder="Nama Obat" required>
+                        <label for="">Tanggal Transaksi</label>
+                        <input type="date" name="transaksi" value="<?= $transaksi = "" ?>" class="form-control" placeholder="Tgl Produksi Obat" required>
                     </div>
+
                     <div class="form-group">
-                        <label for="">Bentuk Obat</label>
-                        <input type="text" name="tbentukobat" maxlength="10" value="<?= @$bentukobat ?>" class="form-control" placeholder="Bentuk Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Tgl Produksi</label>
-                        <input type="date" name="tproduksiobat" value="<?= $tglprod = "" ?>" class="form-control" placeholder="Tgl Produksi Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Tgl Kadaluarsa</label>
-                        <input type="date" name="tkadaluarsaobat" value="<?= $tglexp = "" ?>" class="form-control" placeholder="Tgl Kadaluarsa Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Harga Satuan</label>
-                        <input type="number" name="thargasatuan" maxlength="30" value="<?= $hargasatuan = "" ?>" class="form-control" placeholder="Harga Satuan" required>
+                        <label for="">Jumlah Terjul</label>
+                        <input type="number" name="terjual" maxlength="30" value="<?= $terjual = "" ?>" class="form-control" placeholder="Jumlah Terjual" required>
                     </div>
 
                     <button type="submit" class="btn btn-primary mt-3" name="btnadd">Save</button>

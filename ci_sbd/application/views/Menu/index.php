@@ -21,11 +21,10 @@
         <div class="col-lg-12">
             <!--ada ini tp gaada isinya-->
             <a href="" class="btn btn-primary mb-3 mt-3" data-toggle="modal" data-target="#newMenuModal">Add</a>
-            <a href="<?= base_url('menu/updateHarga'); ?>" class="btn btn-warning" data-toggle="modal" data-target="#updateHargaModal">
-                Edit
-            </a>
-            <a href="" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
-                Delete
+
+            <a class="btn btn-success " href="<?= base_url('menu/exportDetailObat') ?>">
+                <i class="fas fa-fw fa-file-excel"></i>
+                <span>Export</span>
             </a>
             <table class="table table-hover">
                 <thead>
@@ -55,10 +54,10 @@
                             <td><?= $row['TglKadaluarsa'] ?></td>
                             <td><?= $row['HargaSatuan'] ?></td>
                             <td>
-                                <a href="<?= base_url('menu/updateHarga'); ?>" class="btn btn-warning" data-toggle="modal" data-target="#updateHargaModal">
+                                <a href="<?php echo base_url(); ?>menu/updateHarga/<?= $row['KodeObat']; ?>" action="" class="btn btn-warning">
                                     Edit
                                 </a>
-                                <a href="" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
+                                <a href="<?php echo base_url(); ?>menu/deleteObat/<?= $row['KodeObat']; ?>" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
                                     Delete
                                 </a>
                             </td>
@@ -91,15 +90,15 @@
                 <form action="" method="post">
                     <div class="form-group">
                         <label for="">Kode Obat</label>
-                        <input type="text" name="tkodeobat" maxlength="10" value="<?= @$kodeobat ?>" class="form-control" placeholder="Kode Obat" required>
+                        <input type="text" name="tkodeobat" maxlength="10" value="<?= @$kodeobat ?>" class="form-control" placeholder="Kode Obat" autocomplete="off" required>
                     </div>
                     <div class="form-group">
                         <label for="">Nama Obat</label>
-                        <input type="text" name="tnamaobat" maxlength="20" value="<?= @$namaobat ?>" class="form-control" placeholder="Nama Obat" required>
+                        <input type="text" name="tnamaobat" maxlength="20" value="<?= @$namaobat ?>" class="form-control" placeholder="Nama Obat" autocomplete="off" required>
                     </div>
                     <div class="form-group">
                         <label for="">Bentuk Obat</label>
-                        <input type="text" name="tbentukobat" maxlength="10" value="<?= @$bentukobat ?>" class="form-control" placeholder="Bentuk Obat" required>
+                        <input type="text" name="tbentukobat" maxlength="10" value="<?= @$bentukobat ?>" class="form-control" placeholder="Bentuk Obat" autocomplete="off" required>
                     </div>
                     <div class="form-group">
                         <label for="">Tgl Produksi</label>
@@ -128,38 +127,3 @@
 <!-- Button trigger modal -->
 
 <!-- Modal UPDATE OBAT-->
-<div class="modal fade" id="updateHargaModal" tabindex="-1" role="dialog" aria-labelledby="updateHargaModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateHargaModalLabel">Update Harga</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="<?= base_url('menu/updateHarga'); ?>" method="post">
-
-                <?php
-                $data = $this->db->get('obat');
-
-                ?>
-
-
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="" value="">Kode Obat</label>
-                        <input type="text" name="tkodeobat" maxlength="10" value="<?= $product['KodeObat'] ?>" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Harga Satuan</label>
-                        <input type="number" name="thargasatuan" maxlength="30" value="" class="form-control" placeholder="Harga Satuan" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" href="<?= base_url('menu/updateHarga') ?>">Add</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>

@@ -18,12 +18,16 @@
 
         <div class="col-lg-8">
             <!--ada ini tp gaada isinya-->
-            <a href="" class="btn btn-primary mb-3 mt-3" data-toggle="modal" data-target="#newMenuModal">Add</a>
-            <a href="<?= base_url('menu/updateHarga'); ?>" class="btn btn-warning" data-toggle="modal" data-target="#updateHargaModal">
+            <a href="<?= base_url('menu') ?>" class="btn btn-primary mb-3 mt-3" data-toggle="modal" data-target="#transaksiModal">Add</a>
+            <a href="<?= base_url('menu/updateTransaction'); ?>" class="btn btn-warning" data-toggle="modal" data-target="#transaksiModal">
                 Edit
             </a>
             <a href="" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
                 Delete
+            </a>
+            <a class="btn btn-success " href="<?= base_url('menu/exportPenjualan_Mar') ?>">
+                <i class="fas fa-fw fa-file-excel"></i>
+                <span>Export</span>
             </a>
 
             <!--Month Select Buttons Started-->
@@ -45,6 +49,7 @@
                         <th scope="col">Kode Obat</th>
                         <th scope="col">Tanggal Transaksi</th>
                         <th scope="col">Jumlah Terjual</th>
+                        <th scope="col">Edit | Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +63,14 @@
                             <td><?= $row['KodeObat'] ?></td>
                             <td><?= $row['TglTransaksi'] ?></td>
                             <td><?= $row['Jumlah_Terjual'] ?></td>
+                            <td>
+                                <a href="<?php echo base_url(); ?>menu/editMaret/<?= $row['id']; ?>" action="" class="btn btn-warning">
+                                    Edit
+                                </a>
+                                <a href="<?php echo base_url(); ?>menu/deletePenMaret/<?= $row['id']; ?>" onclick="return confirm('Are you sure?')" class="btn btn-danger" name="btndelete">
+                                    Delete
+                                </a>
+                            </td>
                         </tr>
 
                     <?php
@@ -77,44 +90,32 @@
 
 <!-- End of Main Content -->
 
-<!--MODAL ADD PRODUCT-->
-<div class="modal fade" id="newMenuModal" tabindex="-1" role="dialog" aria-labelledby="newMenuModalLabel" aria-hidden="true">
+<div class="modal fade" id="transaksiModal" tabindex="-1" role="dialog" aria-labelledby="newMenuModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newMenuModalLabel">Product Info</h5>
+                <h5 class="modal-title" id="newMenuModalLabel">Transaction Info</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="card-body">
-                <form action="" method="post">
+                <form action="<?= base_url('maret') ?>" method="post">
                     <div class="form-group">
                         <label for="">Kode Obat</label>
-                        <input type="text" name="tkodeobat" maxlength="10" value="<?= @$kodeobat ?>" class="form-control" placeholder="Kode Obat" required>
+                        <input type="text" name="tkodeobat" maxlength="10" value="<?= $kodeobat = "" ?>" class="form-control" placeholder="Kode Obat" required>
                     </div>
                     <div class="form-group">
-                        <label for="">Nama Obat</label>
-                        <input type="text" name="tnamaobat" maxlength="20" value="<?= @$namaobat ?>" class="form-control" placeholder="Nama Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Bentuk Obat</label>
-                        <input type="text" name="tbentukobat" maxlength="10" value="<?= @$bentukobat ?>" class="form-control" placeholder="Bentuk Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Tgl Produksi</label>
-                        <input type="date" name="tproduksiobat" value="<?= $tglprod = "" ?>" class="form-control" placeholder="Tgl Produksi Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Tgl Kadaluarsa</label>
-                        <input type="date" name="tkadaluarsaobat" value="<?= $tglexp = "" ?>" class="form-control" placeholder="Tgl Kadaluarsa Obat" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Harga Satuan</label>
-                        <input type="number" name="thargasatuan" maxlength="30" value="<?= $hargasatuan = "" ?>" class="form-control" placeholder="Harga Satuan" required>
+                        <label for="">Tanggal Transaksi</label>
+                        <input type="date" name="transaksi" value="<?= $transaksi = "" ?>" class="form-control" placeholder="Tgl Produksi Obat" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-3" name="btnadd">Save</button>
+                    <div class="form-group">
+                        <label for="">Jumlah Terjual</label>
+                        <input type="number" name="terjual" maxlength="30" value="<?= $terjual = "" ?>" class="form-control" placeholder="Jumlah Terjual" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3" href="<?= base_url('maret') ?>" name="btnadd">Save</button>
                     <button type="reset" class="btn btn-secondary mt-3" name="btnreset">Reset</button>
 
                 </form>

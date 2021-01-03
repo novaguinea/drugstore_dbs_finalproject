@@ -1,4 +1,6 @@
 <!-- Footer -->
+
+<!-- End of Footer -->
 <footer class="sticky-footer bg-white">
     <div class="container my-auto mb-0">
         <div class="copyright text-center my-auto">
@@ -6,8 +8,6 @@
         </div>
     </div>
 </footer>
-<!-- End of Footer -->
-
 </div>
 <!-- End of Content Wrapper -->
 
@@ -34,9 +34,18 @@
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                 <a class="btn btn-success" href="<?= base_url('auth/logout') ?>">Logout</a>
             </div>
+
+
+
         </div>
+
+
     </div>
+
+
 </div>
+
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
@@ -49,5 +58,7 @@
 <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
 
 </body>
+
+
 
 </html>
