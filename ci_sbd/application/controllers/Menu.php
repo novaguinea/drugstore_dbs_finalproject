@@ -66,6 +66,8 @@ class Menu extends CI_Controller
 
     public function updateHargaController()
     {
+        $data['title'] = 'Update Obat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['product'] = $this->db->get('obat');
         $kodeView = $this->input->post('tkodeobat');
         //$KodeObat = $this->db->get_where('obat', ['KodeObat' => $kodeView])->row_array(); //mencari 
@@ -77,11 +79,20 @@ class Menu extends CI_Controller
             'HargaSatuan' => $this->input->post('thargasatuan')
         ];
         $this->db->insert('updateobat', $hargaUpdate);
+
+        $yay = "Data Obat berhasil di UPDATE!\n";
+        date_default_timezone_set('Asia/Jakarta');
+        $date = date('m/d/Y  h:i:s a ');
+        $date_word = "Dimodifikasi : " . $date;
+        $host = "\nNama Host : " . $data['user']['name'] . "\n";
+
+        $arows = $this->db->affected_rows();
+        $rows_word = $arows . " row(s) affected.";
+
+        $alert = $yay . $date_word . $host . $rows_word;
         $this->session->set_flashdata(
             'message',
-            '<div class="alert alert-success" role="alert">
-            Data Obat berhasil Di UPDATE!
-        </div>'
+            $alert
         );
 
         redirect('menu');

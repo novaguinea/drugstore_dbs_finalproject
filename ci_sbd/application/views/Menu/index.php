@@ -12,8 +12,11 @@
         <?= form_error('tkodeobat', '<div class="alert alert-danger" role="alert"> ', ' </div>'); ?>
 
         <!--alert success-->
-        <?php echo $this->session->flashdata('message');
-        ?>
+        <div class="alert alert-warning" role="alert">
+            <?php echo $this->session->flashdata('message');
+            ?>
+        </div>
+
 
     </div>
 
@@ -122,7 +125,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!-- Button trigger modal -->
