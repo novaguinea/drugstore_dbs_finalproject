@@ -82,7 +82,7 @@ class Menu extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         $date = date('d/m/Y  h:i:s a ');
         $date_word = "| Dimodifikasi : " . $date;
-        $host = " | | Nama Host : localhost " . " | | ";
+        $host = " | | Nama Host : " . $data['user']['name'] . " | | ";
 
         $arows = $this->db->affected_rows();
         $rows_word = $arows . " row(s) affected.";
