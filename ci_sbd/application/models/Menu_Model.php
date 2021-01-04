@@ -8,6 +8,13 @@ class Menu_Model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+    function dataUpdateObat()
+    {
+        $this->db->select('*');
+        $this->db->from('updateobat');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
     public function getDataObat($id)
     {
@@ -16,6 +23,21 @@ class Menu_Model extends CI_Model
 
     public function deleteObat_m($id)
     {
+        $this->db->where('KodeObat', $id);
+        $this->db->delete('penapril');
+
+        $this->db->where('KodeObat', $id);
+        $this->db->delete('penjanuari');
+
+        $this->db->where('KodeObat', $id);
+        $this->db->delete('penfebruari');
+
+        $this->db->where('KodeObat', $id);
+        $this->db->delete('penmaret');
+
+        $this->db->where('KodeObat', $id);
+        $this->db->delete('persediaan');
+
         $this->db->where('KodeObat', $id);
         $this->db->delete('obat');
     }

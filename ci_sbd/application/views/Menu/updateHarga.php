@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" id="submit" onclick="display()" href="<?= base_url('menu/updateHargaController') ?>">Save</button>
+                    <button type="submit" class="btn btn-primary" id="submit" onclick="display()" href="<?= base_url('menu/updateHargaController'); ?>">Save</button>
                 </div>
 
             </form>

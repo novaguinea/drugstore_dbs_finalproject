@@ -28,7 +28,11 @@
 
             <a class="btn btn-success " href="<?= base_url('menu/exportDetailObat') ?>">
                 <i class="fas fa-fw fa-file-excel"></i>
-                <span>Export</span>
+                <span>Export Data Obat</span>
+            </a>
+            <a class="btn btn-success " href="<?= base_url('menu/exportUpdateObat') ?>">
+                <i class="fas fa-fw fa-file-excel"></i>
+                <span>Export Update Obat</span>
             </a>
             <table class="table table-hover">
                 <thead>

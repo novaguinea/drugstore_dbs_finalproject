@@ -69,8 +69,6 @@ class Menu extends CI_Controller
         $data['title'] = 'Update Obat';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['product'] = $this->db->get('obat');
-        $kodeView = $this->input->post('tkodeobat');
-        //$KodeObat = $this->db->get_where('obat', ['KodeObat' => $kodeView])->row_array(); //mencari 
 
         $this->form_validation->set_rules('tkodeobat', 'Kode Obat', 'trim|required');
         $this->form_validation->set_rules('thargasatuan', 'Harga Satuan', 'trim|required');
@@ -80,11 +78,11 @@ class Menu extends CI_Controller
         ];
         $this->db->insert('updateobat', $hargaUpdate);
 
-        $yay = "Data Obat berhasil di UPDATE!\n";
+        $yay = "Data Obat berhasil di UPDATE! | ";
         date_default_timezone_set('Asia/Jakarta');
-        $date = date('m/d/Y  h:i:s a ');
-        $date_word = "Dimodifikasi : " . $date;
-        $host = "\nNama Host : " . $data['user']['name'] . "\n";
+        $date = date('d/m/Y  h:i:s a ');
+        $date_word = "| Dimodifikasi : " . $date;
+        $host = " | | Nama Host : localhost " . " | | ";
 
         $arows = $this->db->affected_rows();
         $rows_word = $arows . " row(s) affected.";
@@ -104,7 +102,7 @@ class Menu extends CI_Controller
         $this->session->set_flashdata(
             'message',
             '<div class="alert alert-warning" role="alert">
-                Data Persediaan successfully deleted!
+                Data Obat successfully deleted!
             </div>'
         );
         redirect('menu/index');
@@ -514,7 +512,7 @@ class Menu extends CI_Controller
 
 
 
-    public function export()
+    public function exportMember()
     {
         //$this->load->library('PHPExcel/IOfactory');
 
@@ -624,6 +622,55 @@ class Menu extends CI_Controller
         $filename = "Data_Obat" . date("d-m-Y-H-i-s") . '.xlsx';
 
         $objPHPExcel->getActiveSheet()->setTitle("Data Obat");
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposistion: attachment; filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+
+        $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $writer->save('php://output');
+
+        exit;
+    }
+    public function exportUpdateObat()
+    {
+        //$this->load->library('PHPExcel/IOfactory');
+
+        $obat = $this->Menu_Model->dataUpdateObat();
+
+        require(APPPATH . 'PHPExcel-1.8/PHPExcel-1.8/Classes/PHPExcel.php');
+        require(APPPATH . 'PHPExcel-1.8/PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+
+
+        //require_once 'Classes/PHPExcel.php';
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Kelompok SBD");
+        $objPHPExcel->getProperties()->setLastModifiedBy("Kelompok SBD");
+        $objPHPExcel->getProperties()->setTitle("Info Obat");
+        $objPHPExcel->getProperties()->setSubject("");
+        $objPHPExcel->getProperties()->setDescription("");
+
+        $objPHPExcel->setActiveSheetIndex(0);
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'No.');
+        $objPHPExcel->getActiveSheet()->setCellValue('B1', 'Kode Obat');
+        $objPHPExcel->getActiveSheet()->setCellValue('C1', 'Harga Satuan');
+
+        $row = 2;
+        $no = 1;
+
+        foreach ($obat as $data) {
+            $objPHPExcel->getActiveSheet()->setCellValue('A' . $row, $no);
+            $objPHPExcel->getActiveSheet()->setCellValue('B' . $row, $data['KodeObat']);
+            $objPHPExcel->getActiveSheet()->setCellValue('C' . $row, $data['HargaSatuan']);
+
+            $row++;
+            $no++;
+        }
+
+        $filename = "Update_Obat" . date("d-m-Y-H-i-s") . '.xlsx';
+
+        $objPHPExcel->getActiveSheet()->setTitle("Update Obat");
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposistion: attachment; filename="' . $filename . '"');
@@ -1023,7 +1070,7 @@ class Menu extends CI_Controller
         ];
 
         $backup = &$this->dbutil->backup($pref);
-
+        date_default_timezone_set('Asia/Jakarta');
         $db_name = "apotek_" . date("Y-m-d-H-i-s") . ".sql";
         $save = 'menu/db' . $db_name;
         $this->load->helper('file');

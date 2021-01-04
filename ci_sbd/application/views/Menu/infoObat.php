@@ -17,7 +17,7 @@
 
         <!--SEARCH FEATURE STARTED-->
         <div class="">
-            <a class="btn btn-success" href="<?= base_url('menu/export') ?>">
+            <a class="btn btn-success" href="<?= base_url('menu/exportMember') ?>">
                 <i class="fas fa-fw fa-file-excel"></i>
                 <span>Export</span>
             </a>
